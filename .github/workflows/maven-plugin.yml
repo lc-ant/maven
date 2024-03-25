@@ -1,0 +1,14 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    uses: lc-ant/parent/.github/workflows/template.maven-build.yml@develop
+  deploy-snapshot-jars:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+    needs: build
+    uses: lc-ant/parent/.github/workflows/template.maven-deploy-snapshot-jars.yml@develop
+    permissions:
+      contents: read
+      packages: write

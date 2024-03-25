@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>$${{groupId}}$$</groupId>
+    <artifactId>$${{parentArtifactId}}$$</artifactId>
+    <version>$${{version}}$$</version>
+  </parent>
+  <artifactId>jacoco-aggregate-report</artifactId>
+  <packaging>pom</packaging>
+  
+  <dependencies>
+    $${{dependencies}}$$
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <profiles>
+	<profile>
+      <id>tests</id>
+      <activation>
+        <property>
+          <name>!skipTests</name>
+        </property>
+      </activation>
+      <build>
+		<plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>report-aggregate</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>report-aggregate</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>merge-results</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>merge</goal>
+                </goals>
+                <configuration>
+                  <fileSets>
+                    <fileSet>
+                      <directory>${project.basedir}/..</directory>
+                      <includes>
+                        <include>**/target/jacoco.exec</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                  <destFile>${project.basedir}/../target/jacoco.exec</destFile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+	  </build>
+    </profile>
+  </profiles>
+
+</project>
