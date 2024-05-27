@@ -10,7 +10,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
-	<maven-plugin-api.version>3.9.6</maven-plugin-api.version>
+	<maven-plugin-api.version>3.9.7</maven-plugin-api.version>
 	<maven-plugin-tools.version>3.12.0</maven-plugin-tools.version>
 	<lc-ant-core.version>0.0.1-SNAPSHOT</lc-ant-core.version>
   </properties>
